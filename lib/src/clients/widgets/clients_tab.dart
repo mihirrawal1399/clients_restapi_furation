@@ -1,6 +1,6 @@
 import 'package:clients_restapi_furation/src/clients/client_provider.dart';
+import 'package:clients_restapi_furation/src/clients/widgets/clients_list.dart';
 import 'package:flutter/material.dart';
-
 
 class ClientsTab extends StatefulWidget {
   final String tabName;
@@ -20,11 +20,13 @@ class ClientsTabState extends State<ClientsTab> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       switch (widget.tabName) {
         case 'All':
-        ClientsProvider().getClients().then((_) {
-          setState(() {
-              _isLoading = false;
-            });
-        },);
+          ClientsProvider().getClients().then(
+            (_) {
+              setState(() {
+                _isLoading = false;
+              });
+            },
+          );
           break;
         case 'Paginated':
           ClientsProvider().getClientsPaginated().then((_) {
@@ -55,11 +57,12 @@ class ClientsTabState extends State<ClientsTab> {
   @override
   Widget build(BuildContext context) {
     // final clientsProvider = Provider.of<ClientsProvider>(context);
+    final clients = ClientsProvider().clients;
 
     return _isLoading
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : ClientsTab(tabName: widget.tabName);
+        : ClientsList(clients: clients, tabName: widget.tabName);
   }
 }
