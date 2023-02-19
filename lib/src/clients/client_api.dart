@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:clients_restapi_furation/src/clients/client_model.dart';
 import 'package:http/http.dart' as http;
 
-class ApiClient {
+class ClientService {
   static const baseUrl = 'https://example.com/api';
 
   static Future<List<Client>> getClientsReusable({int limit = 5, int? lastId, String? colm}) async {

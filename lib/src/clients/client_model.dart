@@ -23,13 +23,13 @@ class Client {
     );
   }
 
-  // Map<String, dynamic> toJson() {
-  //   return {
-  //     'id': id,
-  //     'name': name,
-  //     'age' : age,
-  //     'spend' : spend,
-  //     'visits' : visits,
-  //   };
-  // }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'age' : age,
+      'spend' : spend,
+      'visits' : visits,
+    };
+  }
 }
