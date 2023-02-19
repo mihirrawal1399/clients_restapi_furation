@@ -19,11 +19,15 @@ class ClientsList extends StatelessWidget {
         // );
         return Row(
           children: [
-            Text(clients[index].id.toString()),
-            Text(clients[index].name),
-            Text(clients[index].age.toString()),
-            Text(clients[index].spend.toString()),
-            Text(clients[index].visits.toString()),
+            Text('ID: ${clients[index].id}'),
+            const Spacer(),
+            Text('Name: ${clients[index].name}'),
+            const Spacer(),
+            Text('Age: ${clients[index].age}'),
+            const Spacer(),
+            Text('Spend: ${clients[index].spend}'),
+            const Spacer(),
+            Text('Visits: ${clients[index].visits}'),
           ],
         );
       },
