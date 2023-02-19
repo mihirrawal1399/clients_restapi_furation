@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
-                const ClientPage();
+                return const ClientPage();
                 // switch (routeSettings.name) {
                 //   case SettingsView.routeName:
                 //     return SettingsView(controller: settingsController);
