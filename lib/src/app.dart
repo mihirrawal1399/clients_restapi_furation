@@ -1,7 +1,9 @@
+import 'package:clients_restapi_furation/src/clients/client_provider.dart';
 import 'package:clients_restapi_furation/src/clients/client_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
@@ -67,7 +69,9 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute<void>(
               settings: routeSettings,
               builder: (BuildContext context) {
-                return const ClientPage();
+                return ChangeNotifierProvider(
+                  create: (_) => ClientsProvider(),
+                  child: const ClientPage());
                 // switch (routeSettings.name) {
                 //   case SettingsView.routeName:
                 //     return SettingsView(controller: settingsController);
