@@ -9,6 +9,7 @@ class ClientsProvider with ChangeNotifier {
 
   Future<void> getClients() async {
     _clients = await ClientService.getClients();
+    // print(_clients.toString());
     notifyListeners();
   }
 

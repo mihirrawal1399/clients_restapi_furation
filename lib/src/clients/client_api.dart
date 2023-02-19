@@ -41,10 +41,10 @@ class ClientService {
       })
     );
     if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
-      // print(response.body);
-      // print(jsonData);
-      return List<Client>.from(jsonData.map((json) => Client.fromJson(json)));
+      final jsonData= json.decode(response.body);
+      print(response.body);
+      print(jsonData);
+      return List<Client>.from(jsonData['clients'].map((json) => Client.fromJson(json)));
     } else {
       throw Exception('Failed to get clients');
     }
@@ -60,7 +60,9 @@ class ClientService {
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      return List<Client>.from(jsonData.map((json) => Client.fromJson(json)));
+      print(response.body);
+      print(jsonData);
+      return List<Client>.from(jsonData['clients'].map((json) => Client.fromJson(json)));
     } else {
       throw Exception('Failed to get clients');
     }
@@ -76,7 +78,9 @@ class ClientService {
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      return List<Client>.from(jsonData.map((json) => Client.fromJson(json)));
+      print(response.body);
+      print(jsonData);
+      return List<Client>.from(jsonData['clients'].map((json) => Client.fromJson(json)));
     } else {
       throw Exception('Failed to get clients');
     }
@@ -94,7 +98,9 @@ class ClientService {
     );
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
-      return List<Client>.from(jsonData.map((json) => Client.fromJson(json)));
+      print(response.body);
+      print(jsonData);
+      return List<Client>.from(jsonData['clients'].map((json) => Client.fromJson(json)));
     } else {
       throw Exception('Failed to get clients');
     }

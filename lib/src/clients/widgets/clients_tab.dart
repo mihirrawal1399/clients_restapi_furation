@@ -1,11 +1,14 @@
+import 'package:clients_restapi_furation/src/clients/client_model.dart';
 import 'package:clients_restapi_furation/src/clients/client_provider.dart';
 import 'package:clients_restapi_furation/src/clients/widgets/clients_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ClientsTab extends StatefulWidget {
   final String tabName;
+  final List<Client> clients; 
 
-  const ClientsTab({super.key, required this.tabName});
+  const ClientsTab({super.key, required this.tabName, required this.clients});
 
   @override
   ClientsTabState createState() => ClientsTabState();
@@ -20,7 +23,7 @@ class ClientsTabState extends State<ClientsTab> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       switch (widget.tabName) {
         case 'All':
-          ClientsProvider().getClients().then(
+          Provider.of<ClientsProvider>(context, listen: false).getClients().then(
             (_) {
               setState(() {
                 _isLoading = false;
@@ -29,21 +32,21 @@ class ClientsTabState extends State<ClientsTab> {
           );
           break;
         case 'Paginated':
-          ClientsProvider().getClientsPaginated().then((_) {
+          Provider.of<ClientsProvider>(context, listen: false).getClientsPaginated().then((_) {
             setState(() {
               _isLoading = false;
             });
           });
           break;
         case 'Sorted':
-          ClientsProvider().getClientsSorted().then((_) {
+          Provider.of<ClientsProvider>(context, listen: false).getClientsSorted().then((_) {
             setState(() {
               _isLoading = false;
             });
           });
           break;
         case 'Paged and Sorted':
-          ClientsProvider().getClientsPagedAndSorted().then((_) {
+          Provider.of<ClientsProvider>(context, listen: false).getClientsPagedAndSorted().then((_) {
             setState(() {
               _isLoading = false;
             });
@@ -56,13 +59,14 @@ class ClientsTabState extends State<ClientsTab> {
 
   @override
   Widget build(BuildContext context) {
-    // final clientsProvider = Provider.of<ClientsProvider>(context);
-    final clients = ClientsProvider().clients;
+    // final clients = Provider.of<ClientsProvider>(context).clients;
+    // print('CLIENTS UI');
+    // print(clients);
 
     return _isLoading
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : ClientsList(clients: clients, tabName: widget.tabName);
+        : ClientsList(clients: widget.clients, tabName: widget.tabName);
   }
 }
