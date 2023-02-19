@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:clients_restapi_furation/src/clients/client_model.dart';
 import 'package:http/http.dart' as http;
 

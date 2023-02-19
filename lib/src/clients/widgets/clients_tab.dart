@@ -1,32 +1,65 @@
-import 'package:clients_restapi_furation/src/clients/client_model.dart';
+import 'package:clients_restapi_furation/src/clients/client_provider.dart';
 import 'package:flutter/material.dart';
 
-class ClientsTab extends StatelessWidget {
-  final List<Client> clients;
+
+class ClientsTab extends StatefulWidget {
   final String tabName;
 
-  const ClientsTab({super.key, required this.clients, required this.tabName});
+  const ClientsTab({super.key, required this.tabName});
+
+  @override
+  ClientsTabState createState() => ClientsTabState();
+}
+
+class ClientsTabState extends State<ClientsTab> {
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      switch (widget.tabName) {
+        case 'All':
+        ClientsProvider().getClients().then((_) {
+          setState(() {
+              _isLoading = false;
+            });
+        },);
+          break;
+        case 'Paginated':
+          ClientsProvider().getClientsPaginated().then((_) {
+            setState(() {
+              _isLoading = false;
+            });
+          });
+          break;
+        case 'Sorted':
+          ClientsProvider().getClientsSorted().then((_) {
+            setState(() {
+              _isLoading = false;
+            });
+          });
+          break;
+        case 'Paged and Sorted':
+          ClientsProvider().getClientsPagedAndSorted().then((_) {
+            setState(() {
+              _isLoading = false;
+            });
+          });
+          break;
+        default:
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: clients.length,
-      itemBuilder: (context, index) {
-        // return ListTile(
-        //   title: Text(clients[index].name),
-        //   subtitle: Text(clients[index].email),
-        //   trailing: Text(clients[index].phone),
-        // );
-        return Row(
-          children: [
-            Text(clients[index].id.toString()),
-            Text(clients[index].name),
-            Text(clients[index].age.toString()),
-            Text(clients[index].spend.toString()),
-            Text(clients[index].visits.toString()),
-          ],
-        );
-      },
-    );
+    // final clientsProvider = Provider.of<ClientsProvider>(context);
+
+    return _isLoading
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : ClientsTab(tabName: widget.tabName);
   }
 }
